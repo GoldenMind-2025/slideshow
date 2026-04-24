@@ -1,0 +1,6 @@
+pygame
+Pillow
+pillow-heif
+pytest
+streamlit
+supabase
