@@ -92,7 +92,7 @@ def extract_exif_date(img):
     return "Unknown"
 
 def main():
-    st.markdown("<h1 style='text-align: center;'>📸 Cloud Photo Slideshow</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>📸 Mothiaai Photo Slideshow</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: gray;'>Powered by Supabase Cloud Storage</p>", unsafe_allow_html=True)
 
     if 'is_playing' not in st.session_state:
@@ -172,7 +172,9 @@ def main():
                 
                 final_album = ov_album if ov_album else default_album
                 final_date = ov_date if ov_date else date_taken
-                
+                final_album = "Mothiaai Birthday"
+                final_date = "26-Apr-26"
+
                 # 4. Render to Screen
                 html = f"""
                     <div style="display: flex; justify-content: center; align-items: center; width: 100%; max-height: 75vh;">
