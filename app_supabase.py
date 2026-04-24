@@ -33,11 +33,12 @@ def scan_supabase_bucket():
                 if name == '.emptyFolderPlaceholder': continue
                 current_path = f"{folder_path}/{name}" if folder_path else name
                 
-                # In Supabase python, folders usually lack metadata
-                if item.get('metadata') is None:
-                    all_files.extend(get_all_files(current_path))
-                else:
+                # Use the presence of a file extension to identify files
+                # This guarantees overlay.txt is recognized even if Supabase drops its metadata
+                if '.' in name:
                     all_files.append(current_path)
+                else:
+                    all_files.extend(get_all_files(current_path))
         except Exception as e:
             print(f"Error scanning {folder_path}: {e}")
         return all_files
