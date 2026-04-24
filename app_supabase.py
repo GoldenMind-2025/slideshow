@@ -182,7 +182,7 @@ def main():
                     </div>
                 """
                 image_container.markdown(html, unsafe_allow_html=True)
-                text_container.markdown(f"<h3 style='text-align: center; color: #a9a9a9;'>{final_album} &nbsp; | &nbsp; {final_date}</h3>", unsafe_allow_html=True)
+                text_container.markdown(f"<h3 style='text-align: center; color: #a9a9a9;'>{final_album} &nbsp;  &nbsp; {final_date}</h3>", unsafe_allow_html=True)
                 progress_container.progress((idx + 1) / total)
                 
             except Exception as e:
