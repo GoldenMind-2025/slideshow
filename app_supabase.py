@@ -172,7 +172,7 @@ def main():
                 
                 final_album = ov_album if ov_album else default_album
                 final_date = ov_date if ov_date else date_taken
-                final_album = "Mothiaai Birthday"
+                final_album = "Mothiaai Memories"
                 final_date = "26-Apr-26"
 
                 # 4. Render to Screen
