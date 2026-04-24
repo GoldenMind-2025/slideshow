@@ -54,13 +54,14 @@ def scan_supabase_bucket():
     overlay_cache = {}
     for ov in overlays:
         try:
-            data = supabase.storage.from_(BUCKET_NAME).download(ov).decode('utf-8')
-            lines = [line.strip() for line in data.split('\n')]
+            data = supabase.storage.from_(BUCKET_NAME).download(ov)
+            text = data.decode('utf-8', errors='ignore')
+            lines = [line.strip() for line in text.splitlines() if line.strip()]
             
-            album_override = lines[0][:20] if len(lines) > 0 and lines[0] else None
+            album_override = lines[0][:20] if len(lines) > 0 else None
             date_override = None
             
-            if len(lines) > 1 and lines[1]:
+            if len(lines) > 1:
                 d = lines[1].strip('"\'')
                 for fmt in ["%d-%b-%Y", "%d-%B-%Y", "%d-%b-%y", "%d-%B-%y", "%d-%m-%Y"]:
                     try:
@@ -70,10 +71,11 @@ def scan_supabase_bucket():
                     except ValueError:
                         pass
                         
-            parent = ov.rsplit('/', 1)[0]
+            parent = ov.rsplit('/', 1)[0] if '/' in ov else ""
             overlay_cache[parent] = (album_override, date_override)
-        except:
-            pass
+            print(f"Successfully loaded overlay for {parent}: Album='{album_override}', Date='{date_override}'")
+        except Exception as e:
+            print(f"Failed to parse overlay {ov}: {e}")
             
     return photos, music, overlay_cache
 
